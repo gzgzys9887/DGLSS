@@ -1,0 +1,172 @@
+##################
+## Model options
+model:
+  name: 'MinkUNet34'
+  in_feat_size: 1
+  out_classes: 10
+  out_shape: null
+  min_coordinate: null
+
+###################
+## Dataset options
+dataset_SemKITTI:
+  data_path: "../SemanticKITTI/sequences"
+  ignore_label: 0
+  label_mapping: "./configs/label_mapping/semantic-kitti.yaml"
+  max_volume_space:
+    - 50.
+    - 50.
+    - 2.
+  min_volume_space:
+    - -50.
+    - -50.
+    - -4.
+  out_shape:
+    - 512
+    - 512
+    - 32
+  min_coordinate:
+    - -256
+    - -256
+    - -21 
+  voxel_size: 0.2
+  beam: 64
+  fov: [-23.6, 3.2]
+
+  
+dataset_nuScenes:
+  data_path: "../nuScenes"
+  ignore_label: 0
+  label_mapping: "./configs/label_mapping/nuscenes.yaml"
+  max_volume_space:
+    - 50.
+    - 50.
+    - 3
+  min_volume_space:
+    - -50.
+    - -50.
+    - -5
+  out_shape:
+    - 512
+    - 512
+    - 48
+  min_coordinate:
+    - -256
+    - -256
+    - -29
+  voxel_size: 0.2
+  beam: 32
+  fov: [-30.0, 10.0]
+
+  
+dataset_Waymo:
+  data_path: "../Waymo2"
+  ignore_label: 0
+  label_mapping: "./configs/label_mapping/waymo.yaml"
+  max_volume_space:
+    - 75. 
+    - 75.
+    - 2
+  min_volume_space:
+    - -75.
+    - -75.
+    - -4
+  out_shape:
+    - 768
+    - 768
+    - 32
+  min_coordinate:
+    - -384
+    - -384
+    - -21
+  voxel_size: 0.2
+  beam: 64
+  fov: [-17.6, 2.4]
+
+
+dataset_SemPOSS:
+  data_path: "../POSS/sequences"
+  ignore_label: 0
+  label_mapping: "./configs/label_mapping/semantic-poss.yaml"
+  max_volume_space:
+    - 75.
+    - 75.
+    - 4.
+  min_volume_space:
+    - -75.
+    - -75.
+    - -4.
+  out_shape:
+    - 768
+    - 768
+    - 48 
+  min_coordinate:
+    - -384
+    - -384
+    - -24 
+  voxel_size: 0.2
+  beam: 40
+  fov: [-16.0, 7.0]
+  
+###################
+## Data_loader options
+train_dataloader:
+  training: True
+  batch_size: 8
+  shuffle: True
+  num_workers: 12
+  pin_memory: True
+  drop_last: True
+
+val_dataloader:
+  training: False
+  batch_size: 1
+  shuffle: False
+  num_workers: 12
+  pin_memory: False
+
+test_dataloader:
+  training: False
+  batch_size: 1
+  shuffle: False
+  num_workers: 12
+  pin_memory: False
+
+###################
+## Train params
+train_params:
+  max_steps: 200000
+  learning_rate: 0.001
+  criterion_sem: "wce" 
+  criterion_const: "L1" 
+  consistency_loss_weight: 0.3
+  correlation_loss_weight: 20 
+  affinity_threshold: 0.707
+  use_consistency: True
+  use_correlation: True
+  use_pretrained: False
+  pretrained_ckpt_path: null
+  resume_ckpt: null
+  
+generalization_params:
+  source: 'waymo'
+  target: ['kitti', 'waymo', 'nuscenes', 'poss']
+  use_sparse_aug: True
+  positive_num: 1
+  beam_sampling: [0.3, 0.7]
+
+#####################
+## Experiment Params
+exp_params:
+  exp_name: "ExpDGLSS"
+  log_dir: "Test"
+  log_freq: 500
+
+###################
+## Test params
+test_params:
+  target: ['poss']
+  log_dir: "Test"
+  save_result: True
+  ckpt_path: null
+

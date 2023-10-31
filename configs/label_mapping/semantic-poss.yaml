@@ -1,0 +1,78 @@
+# This file is covered by the LICENSE file in the root of this project.
+labels:
+  0: "unlabeled"
+  4: "1 person"
+  5: "2+ person"
+  6: "rider"
+  7: "car"
+  8: "trunk"
+  9: "plants"
+  10: "traffic sign 1" # standing sign
+  11: "traffic sign 2" # hanging sign
+  12: "traffic sign 3" # high/big hanging sign
+  13: "pole"
+  14: "garbage-can"
+  15: "building"
+  16: "cone/stone"
+  17: "fence"
+  21: "bike"
+  22: "ground"
+learning_map_common:
+  0: 0   # "unlabeled",
+  1: 0
+  2: 0
+  3: 0
+  4: 6   # "person",
+  5: 6  # "person",
+  6: 0   # "rider" to "unlabeled"
+  7: 1   # "car",
+  8: 9   # "trunk" to "plants"
+  9: 9   # "plants" to "plants"
+  10: 0   #  "traffic sign" to "unlabeled"
+  11: 0   #  "traffic sign" to "unlabeled"
+  12: 0   #  "traffic sign" to "unlabeled"
+  13: 0   #  "pole" to "unlabeled"
+  14: 0   #  "garbage-can" to "unlabeled"
+  15: 0   #  "building" to "unlabeled"
+  16: 0   #  "cone/stone" to "unlabeled"
+  17: 0   #  "fence" to "unlabeled"
+  18: 0
+  19: 0
+  20: 0
+  21: 2   #  "bike",
+  22: 7   #  "ground"
+learning_map:
+  0: -1   # "unlabeled",
+  1: -1
+  2: -1
+  3: -1
+  4: 0   # "person",
+  5: 0  # "person",
+  6: 1   # "rider",
+  7: 2   # "car",
+  8: 3   # "trunk",
+  9: 4   # "plants",
+  10: 5   #  "traffic sign"
+  11: 5   #  "traffic sign"
+  12: 5   #  "traffic sign"
+  13: 6   #  "pole",
+  14: 7   #  "garbage-can",
+  15: 8   #  "building",
+  16: 9   #  "cone/stone",
+  17: 10   #  "fence",
+  18: -1
+  19: -1
+  20: -1
+  21: 11   #  "bike",
+  22: 12   #  "ground"
+split: # sequence numbers
+  train:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 5
+  valid:
+    - 3
+  test:
+    - 3

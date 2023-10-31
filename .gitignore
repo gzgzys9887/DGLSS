@@ -1,0 +1,16 @@
+logs/
+.vscode/
+sample*/
+*.ply
+*/__pycache__
+*.png
+lightning_logs/
+test_logs/
+pretrained/
+utils/common/
+final_ckpts/
+tb3d_log/
+temp.py
+toy.py
+test_results/
+vis.py
